@@ -1,0 +1,118 @@
+:root {
+  --col00: #cfffef;
+  --col01: #bfefdf;
+  --col02: #afdfcf;
+  --col03: #9fcfbf;
+  --col04: #8fbfaf;
+  --col05: #7faf9f;
+  --col06: #6f9f8f;
+  --col07: #5f8f7f;
+  --col08: #4f7f6f;
+  --col09: #3f6f5f;
+  --col0a: #2f5f4f;
+  --col0b: #1f4f3f;
+  --col0c: #0f3f2f;
+  --col0d: #003020;
+  --col10: #9f8f4f;
+}
+html {
+  height: 100vh;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  background-color: var(--col02);
+  color:var(--col0c)
+}
+header {
+  flex: none;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--col0b);
+  color: var(--col01);
+  box-shadow: 0px 2px 4px 2px var(--col0d);
+}
+#lc-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0px 8px 24px;
+}
+#lc-title img {
+  cursor: pointer;
+}
+#lc-title img:hover {
+  border-radius: 50%;
+  box-shadow: 0 0 10px 2px var(--col00);
+}
+#theme {
+  display: flex;
+  align-items: flex-end;
+  padding: 0px 24px 8px 0px;
+}
+#theme-toggle {
+  cursor: pointer;
+  font-size: 32px;
+  line-height: .95;
+  padding: 1px 1px 0 0;
+  border-radius: 50%;
+  outline: 1px solid var(--col10);
+  outline-offset: 1px;
+  color: var(--col0c);
+  transform: rotateZ(0deg);
+  transition: transform 500ms ease-in-out;
+}
+#theme-toggle:hover {
+  box-shadow: 0 0 10px 2px var(--col00);
+}
+#theme-toggle.dark {
+  transform: rotateZ(180deg);
+  transition: transform 500ms ease-in-out;
+}
+main {
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 66%;
+  margin: 0 auto;
+}
+footer {
+  flex: none;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--col03);
+  box-shadow: 0px -1px 4px 0px var(--col06);
+}
+footer p {
+  padding: 12px 24px;
+}
+footer ul {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+}
+a,
+a:visited {
+  padding: 12px 24px;
+  text-decoration: none;
+  color: var(--col0c);
+}
+a {
+  transition: all 600ms ease-out;
+}
+a:hover {
+  background-color: var(--col0c);
+  color: var(--col03);
+  transition: all 600ms ease-out;
+}
