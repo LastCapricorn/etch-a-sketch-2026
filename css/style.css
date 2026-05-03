@@ -35,7 +35,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 header {
   background-color: var(--col0b);
   color: var(--col01);
@@ -84,7 +83,6 @@ header {
   transform: rotateZ(180deg);
   transition: transform 500ms ease-in-out;
 }  
-
 footer {
   background-color: var(--col03);
   box-shadow: 0px -1px 4px 0px var(--col06);
@@ -114,7 +112,6 @@ a:hover {
   color: var(--col03);
   transition: all 600ms ease-out;
 }
-
 main {
   width: 90%;
   margin: 0 auto;
@@ -124,9 +121,11 @@ main {
 }  
 #sketch-board {
   cursor: crosshair;
-  margin-top: 12px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin: 12px 0px;
   background-color: var(--theme-bg, var(--theme-light));
-  flex: 1;
+  flex: none;
   display: flex;
   flex-direction: column;
   gap: var(--grid-toggle, 1px);
@@ -141,12 +140,14 @@ main {
   flex: 1;
 }
 #settings-panel {
-  flex: auto;
+  width: 100%;
+  border: 2px groove var(--col03);
+  flex: none;
+  display: flex;
 }
 .current {
   transition: background-color 500ms ease-out;
 }
-
 #change-size {
   display: flex;
   align-items: center;
@@ -160,7 +161,7 @@ main {
   color: var(--col0c);
 }
 #grid-size {
-  width: 80px;
+  width: 60px;
   text-align: center;
   padding: 2px 0px;
   background-color: var(--col01);
@@ -168,7 +169,7 @@ main {
   border: 2px ridge var(--col07);
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 734px) {
   #lc-title {
     gap: 24px;
     padding: 12px 0px 12px 24px;
@@ -178,19 +179,14 @@ main {
     padding: 0px 24px 8px 0px;
   }
   main {
-    width: 70%;
-    flex-direction: row;
-    border: 1px solid red;
+    align-items: center;
   }
   #sketch-board {
-    max-width: 762px;
-    max-height: 762px;
-    margin-top: 36px;
-    flex: 10;
+    max-width: 660px;
+    margin: 36px 0px 16px;
   }
   #settings-panel {
-    margin-top: 36px;
-    flex: 0;
+    max-width: 660px;
   }
   footer p {
     padding: 12px 0px 12px 24px;
@@ -201,5 +197,23 @@ main {
   a,
   a:visited {
     padding: 12px;
+  }
+}
+
+@media screen and (min-width: 950px) {
+  main {
+    border: 1px solid red;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  #sketch-board {
+    margin: 36px 16px 0px 0px;
+  }
+  #settings-panel {
+    width: 160px;
+    margin-top: 36px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
