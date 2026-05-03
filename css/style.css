@@ -102,7 +102,7 @@ footer ul {
 }
 a,
 a:visited {
-  padding: 8px 8px 8px 0px;
+  padding: 8px;
   text-decoration: none;
   color: var(--col0c);
 }
@@ -123,6 +123,7 @@ main {
   flex-direction: column;
 }  
 #sketch-board {
+  cursor: crosshair;
   margin-top: 12px;
   background-color: var(--theme-bg, var(--theme-light));
   flex: 1;
@@ -141,4 +142,64 @@ main {
 }
 #settings-panel {
   flex: auto;
+}
+.current {
+  transition: background-color 500ms ease-out;
+}
+
+#change-size {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+#grid-minus,
+#grid-plus {
+  cursor: pointer;
+  padding: 0px 4px;
+  background-color: var(--col01);
+  color: var(--col0c);
+}
+#grid-size {
+  width: 80px;
+  text-align: center;
+  padding: 2px 0px;
+  background-color: var(--col01);
+  color: var(--col0c);
+  border: 2px ridge var(--col07);
+}
+
+@media screen and (min-width: 960px) {
+  #lc-title {
+    gap: 24px;
+    padding: 12px 0px 12px 24px;
+  }
+  #theme {
+    align-items: flex-end;
+    padding: 0px 24px 8px 0px;
+  }
+  main {
+    width: 70%;
+    flex-direction: row;
+    border: 1px solid red;
+  }
+  #sketch-board {
+    max-width: 762px;
+    max-height: 762px;
+    margin-top: 36px;
+    flex: 10;
+  }
+  #settings-panel {
+    margin-top: 36px;
+    flex: 0;
+  }
+  footer p {
+    padding: 12px 0px 12px 24px;
+  }
+  footer ul {
+    margin-right: 12px;
+  }
+  a,
+  a:visited {
+    padding: 12px;
+  }
 }
