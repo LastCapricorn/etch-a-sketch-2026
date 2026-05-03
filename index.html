@@ -22,13 +22,21 @@
   <main>
     <div id="sketch-board"></div>
     <div id="settings-panel">
-      <button id="grid-toggler" type="button">grid</button>
-      <button id="grid-reset" type="button">reset</button>
       <div id="change-size">
-        <button id="grid-minus" type="button">&#11206;</button>
+        <button class="settings" id="grid-minus" type="button">&#11206;</button>
         <span id="grid-size">16 x 16</span>
-        <button id="grid-plus" type="button">&#11205;</button>
+        <button class="settings" id="grid-plus" type="button">&#11205;</button>
       </div>
+      <button class="settings" id="grid-reset" type="button">reset</button>
+      <button class="settings active" id="grid-toggler" type="button">grid</button>
+      <button class="settings active" id="black-white" type="button">black</button>
+      <button class="settings" id="random-colors" type="button">random</button>
+      <button class="settings" id="grayscale" type="button">grayscale</button>
+      <button class="settings" id="darken" type="button">darken</button>
+      <button class="settings" id="brighten" type="button">brighten</button>
+      <button class="settings" id="rainbow" type="button">rainbow</button>
+      <button class="settings" id="fire" type="button">fire</button>
+      <button class="settings" id="ice" type="button">ice</button>
     </div>
   </main>
   <footer>

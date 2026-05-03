@@ -3,6 +3,7 @@
 const etchASketch = (() => {
 
   const sketchBoard = document.querySelector("#sketch-board");
+  const settingsPanel = document.querySelector("#settings-panel");
   const gridToggler = document.querySelector("#grid-toggler");
   const gridReset = document.querySelector("#grid-reset");
   const lowerResolution = document.querySelector("#grid-minus");
@@ -30,6 +31,7 @@ const etchASketch = (() => {
     sketchBoard.style.setProperty("--grid-toggle", `${gridSwitch}px`);
     sketchBoard.querySelectorAll(".square-row")
       .forEach( row => row.style.setProperty("--grid-toggle", `${gridSwitch}px`) );
+    gridToggler.classList.toggle("active");
   }
 
   function resetGrid() {
@@ -37,24 +39,44 @@ const etchASketch = (() => {
     generateBoard(gridResolution);
   }
 
-  generateBoard(gridResolution);
+  function changeResolution(change) {
+    if ( (gridResolution === 16 && change === -1) ||
+      (gridResolution === 96 && change === 1) ) return;
+    gridResolution += change * 16;
+    document.querySelector("#grid-size").textContent = `${gridResolution} x ${gridResolution}`;
+    resetGrid();
+  }
 
+  function evaluateSelection(ev) {
+    const selection = ev.target.id;
+    if (!selection) return;
+    switch(selection) {
+      case "grid-minus":
+        changeResolution(-1);
+        break;
+      case "grid-plus":
+        changeResolution(1);
+        break;
+      case "grid-reset":
+        resetGrid();
+        break;
+      case "grid-toggler":
+        toggleGrid();
+        break;
+      case "black-white":
+      case "random-colors":
+      case "grayscale":
+      case "darken":
+      case "brighten":
+      case "rainbow":
+      case "fire":
+      case "ice":
+        break;
+    };
+  }
+
+  settingsPanel.addEventListener("click", evaluateSelection);
   sketchBoard.addEventListener("contextmenu", ev => ev.preventDefault());
-  gridToggler.addEventListener("click", toggleGrid);
-  gridReset.addEventListener("click", resetGrid);
-
-  lowerResolution.addEventListener("click", ev => {
-    if (gridResolution === 16) return;
-    gridResolution -= 16;
-    document.querySelector("#grid-size").textContent = `${gridResolution} x ${gridResolution}`;
-    resetGrid();
-  });
-  raiseResolution.addEventListener("click", ev => {
-    if (gridResolution === 96) return;
-    gridResolution += 16;
-    document.querySelector("#grid-size").textContent = `${gridResolution} x ${gridResolution}`;
-    resetGrid();
-  });
 
   sketchBoard.addEventListener("mouseenter", ev => {
     if (!ev.target.dataset.axis || ev.buttons === 0) return;
@@ -73,5 +95,7 @@ const etchASketch = (() => {
     if (!ev.target.dataset.axis || ev.buttons === 0) return;
     ev.target.classList.remove("current");
   }, 1);
+  
+  generateBoard(gridResolution);
 
 })();

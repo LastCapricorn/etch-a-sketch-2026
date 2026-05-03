@@ -142,31 +142,47 @@ main {
 #settings-panel {
   width: 100%;
   border: 2px groove var(--col03);
+  padding: 8px 8px 8px 8px;
   flex: none;
   display: flex;
-}
-.current {
-  transition: background-color 500ms ease-out;
+  flex-wrap: wrap;
+  gap: 2px;
 }
 #change-size {
   display: flex;
   align-items: center;
-  gap: 1px;
+  gap: 2px;
 }
-#grid-minus,
-#grid-plus {
+.settings {
   cursor: pointer;
-  padding: 0px 4px;
-  background-color: var(--col01);
-  color: var(--col0c);
+  height: 30px;
+  padding: 2px 4px;
+  background-color: var(--col0a);
+  color: var(--col04);
+  border: 2px groove var(--col07);
+}
+#settings-panel > .settings {
+  width: 80px;
+  font-size: 14px;
+}
+.settings:hover {
+  color: var(--col00);
+}
+.settings.active {
+  border: 2px ridge var(--col03);
+  background-color: var(--col04);
+  color: var(--col0d);
 }
 #grid-size {
-  width: 60px;
+  width: 70px;
   text-align: center;
-  padding: 2px 0px;
+  padding: 4px 0px;
   background-color: var(--col01);
   color: var(--col0c);
   border: 2px ridge var(--col07);
+}
+.current {
+  transition: background-color 500ms ease-out;
 }
 
 @media screen and (min-width: 734px) {
