@@ -27,16 +27,24 @@
         <span id="grid-size">16 x 16</span>
         <button class="settings" id="grid-plus" type="button">&#11205;</button>
       </div>
-      <button class="settings" id="grid-reset" type="button">reset</button>
+      <button class="settings" id="clear-board" type="button">clear</button>
       <button class="settings active" id="grid-toggler" type="button">grid</button>
-      <button class="settings active" id="black-white" type="button">black</button>
-      <button class="settings" id="random-colors" type="button">random</button>
-      <button class="settings" id="grayscale" type="button">grayscale</button>
-      <button class="settings" id="darken" type="button">darken</button>
-      <button class="settings" id="brighten" type="button">brighten</button>
-      <button class="settings" id="rainbow" type="button">rainbow</button>
-      <button class="settings" id="fire" type="button">fire</button>
-      <button class="settings" id="ice" type="button">ice</button>
+      <input name="mode" id="monochrome" type="radio" value="0" checked>
+      <label class="settings active" for="monochrome">mono</label>
+      <input name="mode" id="random" type="radio" value="1">
+      <label class="settings" for="random">random</label>
+      <input name="mode" id="grayscale" type="radio" value="2">
+      <label class="settings" for="grayscale">grayscale</label>
+      <input name="mode" id="luminance" type="radio" value="3">
+      <label class="settings" for="luminance">luminance</label>
+      <input name="mode" id="rainbow" type="radio" value="4">
+      <label class="settings" for="rainbow">rainbow</label>
+      <input name="mode" id="fire" type="radio" value="5">
+      <label class="settings" for="fire">fire</label>
+      <input name="mode" id="ice" type="radio" value="6">
+      <label class="settings" for="ice">ice</label>
+      <input name="mode" id="brighten" type="radio" value="7">
+      <label class="settings" for="brighten">brighten</label>
     </div>
   </main>
   <footer>
