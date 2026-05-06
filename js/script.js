@@ -5,7 +5,7 @@ const etchASketch = (() => {
   const sketchBoard = document.querySelector("#sketch-board");
   const settingsPanel = document.querySelector("#settings-panel");
   const gridToggler = document.querySelector("#grid-toggler");
-  const drawModes = [monoChrome, random, grayScale, luminance, rainbow, fire, ice, brighten];
+  const drawModes = [monoChrome, random, luminance, oscillate];
   const defaultHSL = [0, 0, 0];
   const defltHSLBG = [0, 0, 100];
   const isDark = () => document.body.classList.contains("dark");
@@ -15,6 +15,7 @@ const etchASketch = (() => {
   let gridVisible = 1;
   let currentMode = 0;
   let scaleDirection = true;
+  let oscParams = [];
 
   function changeTheme() {
     toggleThemeClass();
@@ -94,23 +95,6 @@ const etchASketch = (() => {
     ev.target.style.backgroundColor = generateHSLString(currentHSL);
   }
 
-  function grayScale(ev) {
-    if(ev.buttons === 2) {
-      currentHSL = isDark() ? [...defaultHSL] : [...defltHSLBG];
-    } else {
-      currentHSL[0] = 0;
-      currentHSL[1] = 0;
-      if (scaleDirection && currentHSL[2] <= 89) {
-        currentHSL[2] += 10;
-      } else if (!scaleDirection && currentHSL[2] >= 11) {
-        currentHSL[2] -= 10;
-      } else {
-        scaleDirection = !scaleDirection;
-      }
-    }
-    ev.target.style.backgroundColor = generateHSLString(currentHSL);
-  }
-
   function luminance(ev) {
     currentHSL = rgbToHsl(stripRGBString(ev.target.style.backgroundColor));
     if (ev.buttons === 1) {
@@ -121,11 +105,24 @@ const etchASketch = (() => {
     ev.target.style.backgroundColor = generateHSLString(currentHSL);
   }
 
-  function rainbow(ev) {}
-  
-  function fire(ev) {}
-  function ice(ev) {}
-  function brighten(ev) {}
+  function oscillate(ev) {
+    if(ev.buttons === 2) {
+      currentHSL = isDark() ? [...defaultHSL] : [...defltHSLBG];
+    } else {
+      let osc, step, lo, hi;
+      [currentHSL, osc, step, lo, hi] = [...oscParams];
+      if (scaleDirection && currentHSL[osc] <= hi) {
+        currentHSL[osc] += step;
+      } else if (!scaleDirection && currentHSL[osc] >= lo) {
+        currentHSL[osc] -= step;
+      } else {
+        scaleDirection = !scaleDirection;
+      }  
+    }  
+    ev.target.style.backgroundColor = generateHSLString(currentHSL);
+  }
+
+  function customColor(ev) {}
 
   function handleSketchBoardEvent(ev) {
     if (ev.type === "pointerenter") {
@@ -136,7 +133,6 @@ const etchASketch = (() => {
     } else {
       drawModes[currentMode](ev);
     }
-
   }
 
   function evaluateSelection(ev) {
@@ -162,13 +158,26 @@ const etchASketch = (() => {
         break;
       case "monochrome":
       case "random":
-      case "grayscale":
       case "luminance":
-      case "rainbow":
-      case "fire":
-      case "ice":
-      case "brighten":
         currentMode = ev.target.value;
+        break;
+      case "grayscale":
+        currentMode = ev.target.value;
+        oscParams = ([[0, 0, 50], 2, 10, 11, 89]);
+        break;
+      case "rainbow":
+        currentMode = ev.target.value;
+        oscParams = ([[180, 100, 50], 0, 10, 11, 349]);
+        break;
+      case "fire":
+        currentMode = ev.target.value;
+        oscParams = ([[30, 100, 50], 0, 3, 3, 57]);
+        break;
+      case "ice":
+        currentMode = ev.target.value;
+        oscParams = ([[207, 100, 50], 0, 3, 167, 242]);
+        break;
+      case "picker":
         break;
     };
   }

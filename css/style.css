@@ -210,7 +210,7 @@ main {
   border: 2px groove var(--col07);
 }
 #settings-panel > .settings {
-  width: 80px;
+  width: 86px;
   font-size: 16px;
 }
 input[type="radio"] {
@@ -226,15 +226,38 @@ label.settings {
 .settings.dark:hover {
   color: var(--col0d);
 }
-.settings.active {
-  border: 2px ridge var(--col03);
-  background-color: var(--col04);
-  color: var(--col0d);
+.settings {
+  border: 2px groove var(--col07);
+  background-color: var(--col0a);
+  color: var(--col03);
 }
-.settings.dark.active {
+.settings.dark {
   border: 2px ridge var(--col0a);
   background-color: var(--col0b);
   color: var(--col02);
+}
+#picker-box {
+  display: flex;
+  flex-direction: column;
+} 
+#picker-label {
+  cursor: pointer;
+  width: 86px;
+  padding: 1px 0px 0px;
+  color: var(--col03);
+  font-size: 12px;
+  text-align: center;
+  background-color: var(--col0a);
+  border: 2px groove var(--col07);
+  border-bottom: none;
+} 
+#picker {
+  cursor: pointer;
+  width: 86px;
+  height: 13px;
+  border: 2px groove var(--col07);
+  border-top: none;
+  background-color: var(--col0a);
 }
 #grid-size {
   width: 70px;
@@ -294,9 +317,25 @@ label.settings {
     margin: 36px 16px 0px 0px;
   }
   #settings-panel {
-    width: 160px;
+    flex: auto;
+    max-width: 160px;
     margin-top: 36px;
     flex-direction: column;
-    align-items: flex-start;
+  }
+  #settings-panel > .settings {
+    width: 100%;
+    font-size: 18px;
+  }
+  #grid-size {
+    width: 89px;
+  }
+  #picker-label {
+    width: 100%;
+    height: 22px;
+    font-size: 18px;
+  }   
+  #picker {
+    width: 100%;
+    height: 15px;
   }
 }
