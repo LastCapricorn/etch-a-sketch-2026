@@ -5,12 +5,11 @@ const etchASketch = (() => {
   const sketchBoard = document.querySelector("#sketch-board");
   const settingsPanel = document.querySelector("#settings-panel");
   const gridToggler = document.querySelector("#grid-toggler");
-  const drawModes = [monoChrome, random, luminance, oscillate];
+  const drawModes = [monoChrome, random, luminance, oscillate, customColor];
   const defaultHSL = [0, 0, 0];
   const defltHSLBG = [0, 0, 100];
   const isDark = () => document.body.classList.contains("dark");
   let currentHSL = [0, 0, 0];
-  let currHSLBG = [0, 0, 100];
   let gridResolution = 16;
   let gridVisible = 1;
   let currentMode = 0;
@@ -34,18 +33,16 @@ const etchASketch = (() => {
     const elements = document.querySelectorAll("body *");
     elements.forEach( elem => elem.classList.toggle("dark"));
     document.body.classList.toggle("dark");
-    currHSLBG = isDark() ? [...defaultHSL] : [...defltHSLBG];
   }
 
   function generateBoard(size) {
-    currHSLBG = isDark() ? [...defaultHSL] : [...defltHSLBG];
     for(let i = 0; i < size; i++) {
       const divRow = document.createElement("div");
       divRow.classList.add("square-row");
       for(let j = 0; j < size; j++) {
         const squareDiv = document.createElement("div");
         squareDiv.classList.add("square");
-        squareDiv.style.backgroundColor = generateHSLString(currHSLBG);
+        squareDiv.style.backgroundColor = generateHSLString(isDark() ? [...defaultHSL] : [...defltHSLBG]);
         divRow.appendChild(squareDiv);
       }  
       sketchBoard.appendChild(divRow);
@@ -122,7 +119,14 @@ const etchASketch = (() => {
     ev.target.style.backgroundColor = generateHSLString(currentHSL);
   }
 
-  function customColor(ev) {}
+  function customColor(ev) {
+    if (ev.buttons === 2) {
+      currentHSL = isDark() ? [...defaultHSL] : [...defltHSLBG];
+    } else {
+      currentHSL = rgbToHsl(hexColToRgbStr(document.querySelector("#picker").value));
+    }
+    ev.target.style.backgroundColor = generateHSLString(currentHSL);
+  }
 
   function handleSketchBoardEvent(ev) {
     if (ev.type === "pointerenter") {
@@ -178,6 +182,7 @@ const etchASketch = (() => {
         oscParams = ([[207, 100, 50], 0, 3, 167, 242]);
         break;
       case "picker":
+        currentMode = 4;
         break;
     };
   }
@@ -209,6 +214,15 @@ const etchASketch = (() => {
 
   function stripRGBString(rgbStr) {
     return rgbStr.slice(4, -1).split(", ").map(num => Number(num));
+  }
+
+  function hexColToRgbStr(hex) {
+    const rgbArr = [
+      parseInt(hex.slice(1, 3),16),
+      parseInt(hex.slice(3, 5),16),
+      parseInt(hex.slice(5),16)
+    ];
+    return rgbArr;
   }
 
   settingsPanel.addEventListener("click", evaluateSelection);
